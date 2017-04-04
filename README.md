@@ -11,8 +11,8 @@
 
 ## Setting up Rails Repo ##
 1. Now, go to your ruby on rails application
-2. In your gemfile, add *gem 'omniauth-google-oauth2', '~> 0.2.1'*.
-3. Run *bundle install*.
+2. In your gemfile, add *gem 'omniauth-google-oauth2', '~> 0.2.1'*
+3. Run *bundle install*
 3.5. Make a new model/view/controller for posts using:
 ```shell
 rails scaffold Posts title:string description:string upvotes:integer
@@ -123,3 +123,28 @@ These connect your login/logout to specific paths. Instead of posts_path, put th
     <% end %>
 ```
 12. Start up your server with *rails server* and try logging in/out!
+
+## Some extra fancy stuff ##
+1. Add these methods to your *app/controllers/application_controller.rb*:
+```ruby
+  def authenticate_user
+    if session[:user_id] == nil
+      redirect_to(:controller => 'login', :action => 'index')
+      return false
+    else
+      return true	
+    end
+  end
+
+  def save_login_state
+    if session[:user_id]
+      flash[:error] = "You must logout to leave!"
+      redirect_to(:controller => 'posts', :action => 'index')
+      return false
+    else
+      return true
+    end
+  end
+```
+2. At the top of the class in *app/controllers/posts_controller.rb*, add *before_filter :authenticate_user*
+3. At the top of the class in *app/controllers/login_controller.rb*, add *before_filter :save_login_state, :only => [:index]*

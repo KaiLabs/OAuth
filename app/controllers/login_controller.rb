@@ -1,5 +1,5 @@
 class LoginController < ApplicationController
-  
+  before_filter :save_login_state, :only => [:index]
   # before_filter :save_login_state, :only => [:index]
   
   # A function to authorize user to login
