@@ -10,7 +10,7 @@
 9. Enter http://localhost:3000/auth/google_oauth2/callback for the authorized redirect URIs
 
 ## Setting up Rails Repo ##
-1. Now, go to your ruby on rails application
+1. Create a new Rails Repo; name it whatever you want.
 2. In your gemfile, add *gem 'omniauth-google-oauth2', '~> 0.2.1'*
 3. Run *bundle install*
 3.5. Make a new model/view/controller for posts using:
