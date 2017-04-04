@@ -37,6 +37,6 @@ end
 6. In your terminal, run the following commands to create the model to store user information:
 ```shell
 	rails g model user provider uid name oauth_token oauth_expires_at:datetime
-rake db:migrate
+	rake db:migrate
 ```
 7.
