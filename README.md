@@ -13,9 +13,10 @@
 1. Create a new Rails Repo; name it whatever you want.
 2. In your gemfile, add *gem 'omniauth-google-oauth2', '~> 0.2.1'*
 3. Run *bundle install*
-3.5. Make a new model/view/controller for posts using:
+
+3.5 Make a new model/view/controller for posts using:
 ```shell
-rails scaffold Posts title:string description:string upvotes:integer
+rails generate scaffold Posts title:string description:string upvotes:integer
 ```
 4. Create a new file in *config/initializers* called *omniauth.rb* with:
 ```ruby
@@ -35,7 +36,7 @@ This step connects the application to your specific Google API project.
 5. In your terminal, navigate to the root of your project directory and run the following commands:
 ```shell
 rails g model user provider uid name oauth_token oauth_expires_at:datetime
-rake db:migrate
+rails db:migrate
 ```
 This step creates the model to store user information.
 6. In the same terminal/directory, run the following commands:
@@ -46,49 +47,48 @@ rails g controller Sessions create destroy
 The first command creates the controller for the landing page and the second command creates the controller for Sessions (logging in/out).
 7. Now in the  *config/routes.rb* file, add the following lines of code to allow the google authentication routes to work with your project:
 ```ruby
-	get 'auth/:provider/callback', to: 'sessions#create'
-	get 'auth/failure', to: redirect('/')
-	get 'signout', to: 'sessions#destroy', as: 'signout'
+get 'auth/:provider/callback', to: 'sessions#create'
+get 'auth/failure', to: redirect('/')
+get 'signout', to: 'sessions#destroy', as: 'signout'
 
-	resources :sessions, only: [:create, :destroy]
-	root "login#index"
+resources :sessions, only: [:create, :destroy]
+root "login#index"
 ```
 The routes file should also have *resources :posts*. Leave that in there.
 8. Add these lines of code to your *User* class in *app/models/user.rb*:
 ```ruby
-    def self.from_omniauth(auth)
-        where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-            user.provider = auth.provider
-		    user.uid = auth.uid
-		    user.name = auth.info.name
-		    user.oauth_token = auth.credentials.token
-		    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-		    user.save!
-	    end
-	end
+def self.from_omniauth(auth)
+  where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+	user.uid = auth.uid
+	user.name = auth.info.name
+	user.oauth_token = auth.credentials.token
+	user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+	user.save!
+  end
+end
 ```
 This handles the logic with the user data when someone logs in.
 9. Add these lines to your class in *app/controllers/application_controller.rb*:
 ```ruby
-    helper_method :current_user
-
-    def current_user
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    end
+  helper_method :current_user
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
 ```
 This checks to see if the user_id is already inside of session.
 10. Add these two methods to your *SessionsController* class in *app/controllers/session_controller.rb*:
 ```ruby
-    def create
-        user = User.from_omniauth(env["omniauth.auth"])
-        session[:user_id] = user.id
-        redirect_to posts_path
-    end
+  def create
+    user = User.from_omniauth(env["omniauth.auth"])
+    session[:user_id] = user.id
+      redirect_to posts_path
+  end
   
-    def destroy
-        session[:user_id] = nil
-        redirect_to posts_path
-    end
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path
+  end
 ```
 These connect your login/logout to specific paths. Instead of posts_path, put the landing page for your own website.
 11. Add these lines of HTML to your *app/views/login/index.html.erb*:
@@ -113,38 +113,33 @@ These connect your login/logout to specific paths. Instead of posts_path, put th
   </body>
 </html>
 ```
-12. Add these lines of HTML to your *app/views/posts/index.html.erb* wherever you want on your page:
+12. Add these lines of HTML to your *app/views/posts/index.html.erb* on the top of the page:
 ```html
 <%= link_to "Sign out", signout_path, id: "sign_out" %>
-    <% @users.each do |user| %>
-      <%= user.provider %>
-      <%= user.uid %>
-      <%= user.name %>
-    <% end %>
 ```
-12. Start up your server with *rails server* and try logging in/out!
+13. Start up your server with *rails server* and try logging in/out!
 
 ## Some extra fancy stuff ##
 1. Add these methods to your *app/controllers/application_controller.rb*:
 ```ruby
-  def authenticate_user
-    if session[:user_id] == nil
-      redirect_to(:controller => 'login', :action => 'index')
-      return false
-    else
-      return true	
-    end
+def authenticate_user
+  if session[:user_id] == nil
+    redirect_to(:controller => 'login', :action => 'index')
+    return false
+  else
+    return true	
   end
+end
 
-  def save_login_state
-    if session[:user_id]
-      flash[:error] = "You must logout to leave!"
-      redirect_to(:controller => 'posts', :action => 'index')
-      return false
-    else
-      return true
-    end
+def save_login_state
+  if session[:user_id]
+    flash[:error] = "You must logout to leave!"
+    redirect_to(:controller => 'posts', :action => 'index')
+    return false
+  else
+    return true
   end
+end
 ```
 2. At the top of the class in *app/controllers/posts_controller.rb*, add:
 ```ruby
