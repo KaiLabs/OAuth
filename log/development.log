@@ -1202,3 +1202,158 @@ Processing by PostsController#index as HTML
 Completed 200 OK in 289ms (Views: 258.2ms | ActiveRecord: 0.4ms)
 
 
+Started GET "/" for 127.0.0.1 at 2017-04-04 14:41:57 -0400
+Started GET "/" for 127.0.0.1 at 2017-04-04 14:41:57 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by LoginController#index as HTML
+Processing by LoginController#index as HTML
+  Rendering login/index.html.erb within layouts/application
+  Rendering login/index.html.erb within layouts/application
+  Rendered login/index.html.erb within layouts/application (958.9ms)
+Completed 200 OK in 1006ms (Views: 987.6ms | ActiveRecord: 0.0ms)
+
+
+  Rendered login/index.html.erb within layouts/application (794.9ms)
+Completed 200 OK in 1038ms (Views: 1012.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2017-04-04 14:42:00 -0400
+(google_oauth2) Request phase initiated.
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2017-04-04 14:42:00 -0400
+(google_oauth2) Request phase initiated.
+Started GET "/auth/google_oauth2/callback?state=cf156c98c6f15d1300ada70e5e292ab7a6886132698310be&code=4/EeOqBczd-jXgxahPgubZ-X9JvMXFL_EInEmROUVBb4g" for 127.0.0.1 at 2017-04-04 14:42:03 -0400
+(google_oauth2) Callback phase initiated.
+Processing by SessionsController#create as HTML
+  Parameters: {"state"=>"cf156c98c6f15d1300ada70e5e292ab7a6886132698310be", "code"=>"4/EeOqBczd-jXgxahPgubZ-X9JvMXFL_EInEmROUVBb4g", "provider"=>"google_oauth2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."provider" = ? AND "users"."uid" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["provider", "google_oauth2"], ["uid", "102085463195576617276"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "oauth_token", "oauth_expires_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["provider", "google_oauth2"], ["uid", "102085463195576617276"], ["name", "Daichi C Onda"], ["oauth_token", "ya29.GlsjBGpMhL5kiFuZsIn_UNFrUn6KivovomHxSYopsrfJaWuRZWzG1Pd9MOUiEXAVUxj6vOSPGpOwzRdqww0O6AiXbbSkPfQRFOMduzwz0uUXF-Ux93KMfHZ1qinB"], ["oauth_expires_at", 2017-04-04 19:42:03 UTC], ["created_at", 2017-04-04 18:42:04 UTC], ["updated_at", 2017-04-04 18:42:04 UTC]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 18ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2017-04-04 14:42:04 -0400
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (10.7ms)
+Completed 200 OK in 38ms (Views: 31.2ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-04 14:44:31 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by LoginController#index as HTML
+  Rendering login/index.html.erb within layouts/application
+  Rendered login/index.html.erb within layouts/application (269.6ms)
+Completed 200 OK in 300ms (Views: 289.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2017-04-04 14:44:33 -0400
+(google_oauth2) Request phase initiated.
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2017-04-04 14:44:33 -0400
+(google_oauth2) Request phase initiated.
+Started GET "/auth/google_oauth2/callback?state=82a55463742d34e054c99c5bc3715b7939bf853df7d1fbdb&code=4/JbGdDFs34AdwGe2g8o_9me_cgKWHOi8mcaML1BSYYbA" for 127.0.0.1 at 2017-04-04 14:44:39 -0400
+(google_oauth2) Callback phase initiated.
+Processing by SessionsController#create as HTML
+  Parameters: {"state"=>"82a55463742d34e054c99c5bc3715b7939bf853df7d1fbdb", "code"=>"4/JbGdDFs34AdwGe2g8o_9me_cgKWHOi8mcaML1BSYYbA", "provider"=>"google_oauth2"}
+DEPRECATION WARNING: env is deprecated and will be removed from Rails 5.1 (called from create at /Users/onda/Desktop/OAuth/app/controllers/sessions_controller.rb:3)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."provider" = ? AND "users"."uid" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["provider", "google_oauth2"], ["uid", "102085463195576617276"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "users" SET "oauth_token" = ?, "oauth_expires_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["oauth_token", "ya29.GlsjBO94knlt-bZ2D6IfUD-Pvo7RyRkdLQXWmsfXgYhCdGXfZWqC9EhnQM-Rzxjk0GLy6AI7Sm8N-b1QkNs6fvvAiZ6yUEJe5jjvTIbwjf3aB3WXpFFjqDgYz4nf"], ["oauth_expires_at", 2017-04-04 19:44:40 UTC], ["updated_at", 2017-04-04 18:44:40 UTC], ["id", 3]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 17ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2017-04-04 14:44:40 -0400
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (17.5ms)
+Completed 200 OK in 49ms (Views: 44.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2017-04-04 14:48:30 -0400
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-04 14:48:30 -0400
+Processing by LoginController#index as HTML
+  Rendering login/index.html.erb within layouts/application
+  Rendered login/index.html.erb within layouts/application (41.7ms)
+Completed 200 OK in 66ms (Views: 61.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2017-04-04 14:48:31 -0400
+(google_oauth2) Request phase initiated.
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2017-04-04 14:48:31 -0400
+(google_oauth2) Request phase initiated.
+Started GET "/auth/google_oauth2/callback?state=11678a2ff6a1764c4aa63398a8886d909547e135b0741dc6&code=4/Yrh6RQHnLEODqmc6zZunRPih3zFaNdrp-wTho5vf4OI" for 127.0.0.1 at 2017-04-04 14:48:31 -0400
+(google_oauth2) Callback phase initiated.
+Processing by SessionsController#create as HTML
+  Parameters: {"state"=>"11678a2ff6a1764c4aa63398a8886d909547e135b0741dc6", "code"=>"4/Yrh6RQHnLEODqmc6zZunRPih3zFaNdrp-wTho5vf4OI", "provider"=>"google_oauth2"}
+DEPRECATION WARNING: env is deprecated and will be removed from Rails 5.1 (called from create at /Users/onda/Desktop/OAuth/app/controllers/sessions_controller.rb:3)
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."provider" = ? AND "users"."uid" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["provider", "google_oauth2"], ["uid", "102085463195576617276"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "users" SET "oauth_token" = ?, "oauth_expires_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["oauth_token", "ya29.GlsjBH1lEqAbLJROPOoTHjFhv4RyXJxKYhlLsyihGhYwCNs99w4rPVvHxiKp7Q9l-_f7tEHqVrS_ifkmjSWZp7_vCLW3hwgFFZ18cJkJ4XaP2-LJEg9krOsokzKO"], ["oauth_expires_at", 2017-04-04 19:48:31 UTC], ["updated_at", 2017-04-04 18:48:33 UTC], ["id", 3]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 6ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2017-04-04 14:48:33 -0400
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 37ms (Views: 34.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-04 14:53:42 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by LoginController#index as HTML
+  Rendering login/index.html.erb within layouts/application
+Started GET "/" for 127.0.0.1 at 2017-04-04 14:53:42 -0400
+Processing by LoginController#index as HTML
+  Rendering login/index.html.erb within layouts/application
+  Rendered login/index.html.erb within layouts/application (158.8ms)
+  Rendered login/index.html.erb within layouts/application (317.2ms)
+Completed 200 OK in 175ms (Views: 173.3ms | ActiveRecord: 0.0ms)
+
+
+Completed 200 OK in 355ms (Views: 343.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2017-04-04 14:53:45 -0400
+(google_oauth2) Request phase initiated.
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2017-04-04 14:53:45 -0400
+(google_oauth2) Request phase initiated.
+Started GET "/auth/google_oauth2/callback?state=52283f8380c46fc756d813b9a3515304e781f997fa039473&code=4/vVIHPGr4BtW8atmjcnZyGz7NnhcpbWmZsPmlnYs02K0" for 127.0.0.1 at 2017-04-04 14:53:52 -0400
+(google_oauth2) Callback phase initiated.
+Processing by SessionsController#create as HTML
+  Parameters: {"state"=>"52283f8380c46fc756d813b9a3515304e781f997fa039473", "code"=>"4/vVIHPGr4BtW8atmjcnZyGz7NnhcpbWmZsPmlnYs02K0", "provider"=>"google_oauth2"}
+DEPRECATION WARNING: env is deprecated and will be removed from Rails 5.1 (called from create at /Users/onda/Desktop/OAuth/app/controllers/sessions_controller.rb:3)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."provider" = ? AND "users"."uid" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["provider", "google_oauth2"], ["uid", "102085463195576617276"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "users" SET "oauth_token" = ?, "oauth_expires_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["oauth_token", "ya29.GlsjBCXaIOTnMm2kyEMLmwdTjBQ9xdc2P8At1zCmp5vWOWWYGO7Fqw39f1dSEuu3IkhaugNluJrkX5MuNuAPjkCnFdIc9xUdM9J9gUNMZP1uPsQTOcjhMhKhT-6T"], ["oauth_expires_at", 2017-04-04 19:53:52 UTC], ["updated_at", 2017-04-04 18:53:52 UTC], ["id", 3]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 27ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2017-04-04 14:53:52 -0400
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 50ms (Views: 44.1ms | ActiveRecord: 1.0ms)
+
+
