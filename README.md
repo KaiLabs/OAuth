@@ -146,5 +146,11 @@ These connect your login/logout to specific paths. Instead of posts_path, put th
     end
   end
 ```
-2. At the top of the class in *app/controllers/posts_controller.rb*, add *before_filter :authenticate_user*
-3. At the top of the class in *app/controllers/login_controller.rb*, add *before_filter :save_login_state, :only => [:index]*
+2. At the top of the class in *app/controllers/posts_controller.rb*, add:
+```ruby
+before_filter :authenticate_user
+```
+3. At the top of the class in *app/controllers/login_controller.rb*, add:
+```ruby
+before_filter :save_login_state, :only => [:index]
+```
