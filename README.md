@@ -56,15 +56,70 @@ The first command creates the controller for the landing page and the second com
 The routes file should also have *resources :posts*. Leave that in there.
 8. Add these lines of code to your *User* class in *app/models/user.rb*:
 ```ruby
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.name = auth.info.name
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
-    end
-  end
+    def self.from_omniauth(auth)
+        where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+            user.provider = auth.provider
+		    user.uid = auth.uid
+		    user.name = auth.info.name
+		    user.oauth_token = auth.credentials.token
+		    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+		    user.save!
+	    end
+	end
 ```
-This handles the user data when someone logs in.
+This handles the logic with the user data when someone logs in.
+9. Add these lines to your class in *app/controllers/application_controller.rb*:
+```ruby
+    helper_method :current_user
+
+    def current_user
+        @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    end
+```
+This checks to see if the user_id is already inside of session.
+10. Add these two methods to your *SessionsController* class in *app/controllers/session_controller.rb*:
+```ruby
+    def create
+        user = User.from_omniauth(env["omniauth.auth"])
+        session[:user_id] = user.id
+        redirect_to posts_path
+    end
+  
+    def destroy
+        session[:user_id] = nil
+        redirect_to posts_path
+    end
+```
+These connect your login/logout to specific paths. Instead of posts_path, put the landing page for your own website.
+11. Add these lines of HTML to your *app/views/login/index.html.erb*:
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Auth Example App</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div>
+      <% if current_user %>
+        Signed in as <strong><%= current_user.name %></strong>!
+        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      <% else %>
+        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+      <% end %>
+    </div>
+  </body>
+</html>
+```
+12. Add these lines of HTML to your *app/views/posts/index.html.erb* wherever you want on your page:
+```html
+<%= link_to "Sign out", signout_path, id: "sign_out" %>
+    <% @users.each do |user| %>
+      <%= user.provider %>
+      <%= user.uid %>
+      <%= user.name %>
+    <% end %>
+```
+12. Start up your server with *rails server* and try logging in/out!
