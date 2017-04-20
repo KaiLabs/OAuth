@@ -187,7 +187,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
-  omniauth-google-oauth2 (~> 0.2.1)
+  omniauth-google-oauth2
   pg
   puma (~> 3.0)
   rails (~> 5.0.1)
