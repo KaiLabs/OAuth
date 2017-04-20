@@ -9,7 +9,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   # YOUR CLIENT SECRET
   'ZCBU1nBy0mrEmsjG5rF8B--5', 
   {
-  	client_options: {ssl: {ca_file: Rails.root.join("cacert.pem").to_s}}, 
+  	client_options: {ssl: {ca_file: '/usr/lib/ssl/certs/ca-certificates.crt'}}, 
 
   	# RESTRICTS TO WESLEYAN PEOPLE
   	hd: 'wesleyan.edu', 
