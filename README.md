@@ -163,12 +163,29 @@ It should look like *add_column :users, :admin, :boolean, default: false*
 ## Adding Admin Users ##
 
 I found two decent ways of making a user an admin:
-1. In your self.from_omniauth method in your User model, you can add a conditional check like:
+1. Promote a user to admin on creation:
+
+In your self.from_omniauth method in your User model, you can add a conditional check like:
 ```ruby
+# If you don't have an 'email' attribute in your Users model that's fine, just don't do that check.
 if user.name == "Daichi Onda" or user.email =="moreyes@wesleyan.edu"
   user.admin = true
 else
   user.admin = false
 end
 ```
+2. Promote a user to admin on some event:
+
+If you want to make it something that happens if they visit a page, you can add this line:
+```ruby
 current_user.update_attribute :admin, true
+```
+to the controller and that makes the current user into an admin.
+
+## Making Things Admin Only ##
+
+```ruby
+if current_user.admin?
+  # do something
+end
+```

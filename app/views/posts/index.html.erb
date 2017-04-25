@@ -2,10 +2,13 @@
 
 <h1>Posts</h1>
 <%= link_to "Sign out", signout_path, id: "sign_out" %>
+    <br>
     <% @users.each do |user| %>
       <%= user.provider %>
       <%= user.uid %>
       <%= user.name %>
+      <%= user.admin %>
+      <br>
     <% end %>
 <table>
   <thead>
