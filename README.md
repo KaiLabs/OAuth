@@ -162,7 +162,7 @@ It should look like *add_column :users, :admin, :boolean, default: false*
 
 ## Adding Admin Users ##
 
-I found two decent ways of making a user an admin:
+I thought of two decent ways of making a user an admin:
 1. Promote a user to admin on creation:
 
 In your self.from_omniauth method in your User model, you can add a conditional check like:
@@ -176,11 +176,14 @@ end
 ```
 2. Promote a user to admin on some event:
 
-If you want to make it something that happens if they visit a page, you can add this line:
+If you want to make it something that happens if they visit a page, you can add this line to the controller:
 ```ruby
-current_user.update_attribute :admin, true
+@current_user = User.find_by id: session[:user_id]
+  # some random conditional
+  if @current_user.name == "Timothy Kim" or @current_user.name == "Tim Kim"
+    @current_user.update_attribute :admin, true
+  end
 ```
-to the controller and that makes the current user into an admin.
 
 ## Making Things Admin Only ##
 
@@ -189,3 +192,5 @@ if current_user.admin?
   # do something
 end
 ```
+
+A good example of when this might be useful is when you want to limit who can create or delete a post.

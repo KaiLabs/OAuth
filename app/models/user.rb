@@ -4,7 +4,7 @@ class User < ApplicationRecord
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
-      if user.name == "Timothy Kim"
+      if user.name == "Daichi Onda" or user.email =="moreyes@wesleyan.edu"
         user.admin = true
       else 
         user.admin = false
